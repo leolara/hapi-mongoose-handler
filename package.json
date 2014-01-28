@@ -1,0 +1,26 @@
+{
+  "name": "hapi-mongoose-handler",
+  "keywords": [
+    "hapi",
+    "mongoose"
+  ],
+  "version": "0.0.1",
+  "main": "./index.coffee",
+  "description": "Generic handlers for using mongoose with hapi",
+  "engines": {
+    "node": ">=0.10.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/craveprogramminginc/metageo-pubsub-websockets"
+  },
+  "dependencies": {
+    "lodash": "~2.4.1"
+  },
+  "peerDependencies": {
+    "hapi": "2.x.x"
+  },
+  "devDependencies": {},
+  "author": "null_radix",
+  "license": "AGPL"
+}
