@@ -21,6 +21,19 @@
     "hapi": "2.x.x"
   },
   "devDependencies": {},
-  "author": "null_radix",
-  "license": "AGPL"
+  "author": {
+    "name": "null_radix"
+  },
+  "license": "AGPL",
+  "readme": "hapi-mongoose-handler\n=====================\n\ngeneric handlers for using mongoose with hapi\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/craveprogramminginc/metageo-pubsub-websockets/issues"
+  },
+  "_id": "hapi-mongoose-handler@0.0.1",
+  "dist": {
+    "shasum": "81d54aad524f8aec5d9f9b9fa52226f22ef1c952"
+  },
+  "_resolved": "git+https://github.com/craveprogramminginc/hapi-mongoose-handler#b5075598aab963acc8690124cad5d483dd971e69",
+  "_from": "git+https://github.com/craveprogramminginc/hapi-mongoose-handler"
 }
