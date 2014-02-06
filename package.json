@@ -20,7 +20,9 @@
   "peerDependencies": {
     "hapi": "2.x.x"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "~1.17.1"
+  },
   "author": {
     "name": "null_radix"
   },

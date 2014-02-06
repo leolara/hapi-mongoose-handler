@@ -6,7 +6,7 @@ _ = require 'lodash'
 module.exports = (options) ->
 
   (request, reply) ->
-    params = request.params
+    params = _.merge request.query, request.params
 
     #get the model
     Model = options.model
