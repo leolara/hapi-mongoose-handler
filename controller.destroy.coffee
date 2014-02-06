@@ -6,11 +6,9 @@ _ = require('lodash')
 module.exports = (options) ->
  
   (request, reply) ->
-    params = _.merge  request.query, request.params
+    params = request.params
 
     Model = options.model
-    if not Model.modelName?
-      Model = Model params
 
     Model.findOne(params).exec (err, model)->
       if err
@@ -24,10 +22,9 @@ module.exports = (options) ->
         #remove the doc
         model.remove ()->
           if options.after
-            options.after model, 'delete', request
-
-          if options.pubsub
-            request.server.plugins['metageo-pubsub'].pub model.toJSON(), 'delete'
+            newReply = options.after model, request, 'delete'
+            if newReply
+              model = newReply
 
           return reply model
       else

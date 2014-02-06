@@ -6,38 +6,57 @@ _ = require 'lodash'
 module.exports = (options) ->
 
   (request, reply) ->
-    params = _.merge request.query, request.params
+    query = _.merge request.query, request.params
     Model = options.model
-    #if the model is not mongoose the run and hope that it gives us a mongoose model
-    if not Model.modelName?
-      Model = Model params
-    
-    if options.before
-      options.before params
 
-    limit = Number params.limit
-    sort = params.sort or params.order or undefined
-    skip = Number(params.skip or params.offset) or undefined
-    config = {}
+    limit = Number query.limit
+    sort = query.sort or query.order or undefined
+    skip = Number(query.skip or query.offset) or undefined
+
 
     #Build the query
-    #Remove undefined params
+    #Remove undefined query
     #(as well as limit, skip, and sort)
-    where = _.transform params, (result, param, key)->
-      if key not in ['limit', 'offset', 'skip', 'sort', 'client'] and not options.queries?[key] and param
+    where = _.transform query, (result, param, key)->
+      if key not in ['limit', 'offset', 'skip', 'sort', 'client']
         if _.isObject param
           param = _.transform param, (result, prop, key)->
             result["$"+key] = prop
-
         result[key] = param
 
     #add queries
-    if options.queries
-      for param, query of options.queries
-        if params[param]
-          where = _.merge(where, query(params[param], params))
+    queries =  options.queries
+    if queries
+      errors = {}
+      for  index, field of queries
+        if _.isFunction field
+          val = field where[index], where, request
+          if not _.isUndefined val
+            where[index] = val
+
+        else
+          if _.isFunction field.transform
+            #get the value of the paramter being manuplated
+            where[index] = field.transform where[index], where, request
+
+          #run validation
+          if _.isFunction field.validate
+            err = field.validate where[index], where, request
+            if err
+              errors[index] = err
+
+          #rename
+          if field.rename and where[index]
+            where[field.rename] = where[index]
+            delete where[index]
+
+      if not _.isEmpty(errors)
+        herror = request.hapi.Error.badRequest()
+        herror.output.payload =  {fields: errors}
+        return reply herror
 
     #add config
+    config = {}
     if options.config
       config = options.config(request.server.settings.app.api)
 
@@ -60,16 +79,10 @@ module.exports = (options) ->
       models.forEach (model) ->
         modelValues.push model
 
-      #subscirbe to this query
-      if options.pubsub and params.client
-        request.server.plugins['metageo-pubsub'].sub params.client, params
-
       #add wrapper
       if options.after
-        #some of the params may have mutated
-        params.sort = sort
-        params.limit = limit
-        params.skip = skip
-        modelValues = options.after modelValues, 'find', params
+        newVals = options.after modelValues, where, request, 'find'
+        if newVals
+          modelValues = newVals
 
       return reply modelValues

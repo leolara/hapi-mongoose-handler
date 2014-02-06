@@ -9,15 +9,10 @@ module.exports = (options) ->
     params = request.params
     payload = request.payload
 
-    if options.before
-      options.before params
-
     if options.omit
       payload = _.omit payload, options.omit
 
     Model = options.model
-    if not Model.modelName
-      Model = Model params
 
     #field manipulation and validation
     fields =  options.fields
@@ -43,6 +38,11 @@ module.exports = (options) ->
               herror = request.hapi.Error.badRequest err
               return reply herror
 
+          #rename
+          if field.rename and where[index]
+            payload[field.rename] = payload[index]
+            delete payload[index]
+
       if not _.isEmpty(errors)
         herror = request.hapi.Error.badRequest()
         error.output.payload =  {fields: erros}
@@ -62,11 +62,9 @@ module.exports = (options) ->
         model.set payload
         model.save ()->
           if options.after
-            options.after model, 'update', request
-
-          #push the model
-          if options.pubsub
-            request.server.plugins['metageo-pubsub'].pub model.toJSON(), 'update'
+            newReply = options.after model, request, 'update'
+            if newReply
+              model = newReply
 
           return reply model
       else
