@@ -33,7 +33,7 @@ class Generic
     #combinded options
     combined = {}
     _.merge combined, @options, options
-    return require("./controller.create.coffee")(combined)
+    return require("./create")(combined)
 
   ###
   Finds objects based on the query
@@ -50,7 +50,7 @@ class Generic
     #combinded options
     combined = {}
     _.merge combined, @options, options
-    return require("./controller.find.coffee")(combined)
+    return require("./find")(combined)
 
   ###
   Finds objects based on the query
@@ -64,7 +64,7 @@ class Generic
     #combinded options
     combined = {}
     _.merge combined, @options, options
-    return require("./controller.findOne.coffee")(combined)
+    return require("./findOne")(combined)
 
   ###
   Finds one object based on the query
@@ -79,7 +79,7 @@ class Generic
     #combinded options
     combined = {}
     _.merge combined, @options, options
-    return require("./controller.update.coffee")(combined)
+    return require("./update")(combined)
 
   ###
   Deletes ojects base on the query
@@ -94,6 +94,6 @@ class Generic
     #combinded options
     combined = {}
     _.merge combined, @options, options
-    return require("./controller.destroy.coffee")(combined)
+    return require("./destroy")(combined)
 
 module.exports = Generic

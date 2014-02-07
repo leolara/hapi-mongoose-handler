@@ -2,17 +2,18 @@
   "name": "hapi-mongoose-handler",
   "keywords": [
     "hapi",
-    "mongoose"
+    "mongoose",
+    "mongo"
   ],
-  "version": "0.0.1",
-  "main": "./index.coffee",
-  "description": "Generic handlers for using mongoose with hapi",
+  "version": "0.0.2",
+  "main": "./lib/index.js",
+  "description": "Generic handlers for quickly making RESTful APIss mongoose with hapi",
   "engines": {
     "node": ">=0.10.5"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/craveprogramminginc/metageo-pubsub-websockets"
+    "url": "https://github.com/craveprogramminginc/hapi-mongoose-handler"
   },
   "dependencies": {
     "lodash": "~2.4.1"
@@ -20,14 +21,12 @@
   "peerDependencies": {
     "hapi": "2.x.x"
   },
-  "devDependencies": {
-    "mocha": "~1.17.1"
+  "scripts": {
+    "prepublish": "coffee -o lib/ -c src/"
   },
-  "author": {
-    "name": "null_radix"
-  },
+  "author": "null_radix <null_radix@riseup.net>",
   "license": "AGPL",
   "bugs": {
-    "url": "https://github.com/craveprogramminginc/metageo-pubsub-websockets/issues"
+    "url": "https://github.com/craveprogramminginc/hapi-mongoose-handler/issues"
   }
 }

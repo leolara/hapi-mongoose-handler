@@ -66,8 +66,4 @@ module.exports = (options) ->
           if newVals
             model = newVals
 
-        #push the model
-        if options.pubsub
-          request.server.plugins['metageo-pubsub'].pub model.toJSON(), 'create'
-
         return reply model
