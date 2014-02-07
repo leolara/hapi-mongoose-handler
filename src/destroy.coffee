@@ -16,7 +16,7 @@ module.exports = (options) ->
       if not model
         return reply request.hapi.Error.notFound("model deleted by " + JSON.stringify(params) + " not found")
 
-      canDelete = if options.check then options.check(model, request) else true
+      canDelete = if options.check then options.check(model, request, 'delete') else true
 
       if canDelete
         #remove the doc
@@ -28,4 +28,4 @@ module.exports = (options) ->
 
           return reply model
       else
-        return reply request.hapi.Error.forbidden 'permission denied'
+        return reply request.hapi.Error.unauthorized 'permission denied'

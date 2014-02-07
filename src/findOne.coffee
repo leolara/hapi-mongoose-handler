@@ -10,12 +10,10 @@ module.exports = (options) ->
 
     #get the model
     Model = options.model
-    if not Model.modelName?
-      Model = Model params
 
     callback = (err, model)->
       if err
-        return request.reply request.hapi.Error.internal err
+        return reply request.hapi.Error.internal err
       if not model
         return reply request.hapi.Error.notFound("model searched for by " + JSON.stringify(params) + " not found")
       return reply model

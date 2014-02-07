@@ -28,5 +28,12 @@
   "license": "AGPL",
   "bugs": {
     "url": "https://github.com/craveprogramminginc/hapi-mongoose-handler/issues"
+  },
+  "devDependencies": {
+    "mongoose": "~3.8.6",
+    "mocha": "~1.17.1",
+    "superagent": "~0.16.0",
+    "chai": "~1.9.0",
+    "lab": "~1.5.0"
   }
 }

@@ -55,7 +55,7 @@ module.exports = (options) ->
       if not model
         return reply request.hapi.Error.notFound(Model.modelName + " with id of" + params.id + " not found")
 
-      canUpdate = if options.check then options.check(model, request) else true
+      canUpdate = if options.check then options.check(model, request, 'update') else true
 
       if canUpdate
         #update the doc
@@ -68,4 +68,4 @@ module.exports = (options) ->
 
           return reply model
       else
-        return reply request.hapi.Error.forbidden 'permission denied'
+        return reply request.hapi.Error.unauthorized 'permission denied'
