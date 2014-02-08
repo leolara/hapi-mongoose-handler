@@ -159,5 +159,14 @@ More Examples
 =============
 [MetaGeo's event controller](https://github.com/craveprogramminginc/metageo-core/blob/master/controllers/eventController.coffee)
 
+FAQs
+====
+### So this shit is broken, now what?
+please open an [issue](https://github.com/craveprogramminginc/hapi-mongoose-handler/issues).
 
+### uhmm its written in coffeesccript and that not 'what the gods intended'
+Diversity is good, stop being a racist.  
+
+### Why am I using mongoose in the first place?
+I don't know and thats beyond the scope of this project.
   
