@@ -131,7 +131,6 @@ var SomeHandler = new Handler({
 
 If you want to overload an individual handler.
 
-```javascript
 //3) we create a new generic handler with the prevous model
 var SomeHandler = new Handler();
 
