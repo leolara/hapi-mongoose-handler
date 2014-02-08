@@ -1,7 +1,8 @@
 hapi-mongoose-handler
 =====================
--Easly turn you mongoose models into API endpoint. 
--Converts mongoose validation errors to 401 with an appropriate error message
+- Easly turn you mongoose models into API endpoint. 
+- Converts mongoose validation errors to 401 with an appropriate error message
+- Trys to follow hapi's configuration centric stlye
 
 
 Example
