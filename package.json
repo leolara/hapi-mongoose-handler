@@ -22,7 +22,7 @@
     "hapi": "2.x.x"
   },
   "scripts": {
-    "prepublish": "coffee -o lib/ -c src/",
+    "prepublish": "./node_modules/coffee-script/bin/coffee  -o lib/ -c src/",
     "test": "./node_modules/mocha/bin/mocha --reporter spec ./test/"
   },
   "author": "null_radix <null_radix@riseup.net>",
@@ -33,8 +33,7 @@
   "devDependencies": {
     "mongoose": "~3.8.6",
     "mocha": "~1.17.1",
-    "superagent": "~0.16.0",
     "chai": "~1.9.0",
-    "lab": "~1.5.0"
+    "coffee-script": "~1.7.1"
   }
 }
