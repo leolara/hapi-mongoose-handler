@@ -22,7 +22,8 @@
     "hapi": "2.x.x"
   },
   "scripts": {
-    "prepublish": "coffee -o lib/ -c src/"
+    "prepublish": "coffee -o lib/ -c src/",
+    "test": "./node_modules/mocha/bin/mocha --reporter spec ./test/"
   },
   "author": "null_radix <null_radix@riseup.net>",
   "license": "AGPL",
