@@ -1,6 +1,7 @@
 hapi-mongoose-handler
 =====================
-Easly turn you mongoose models into API endpoint. 
+-Easly turn you mongoose models into API endpoint. 
+-Converts mongoose validation errors to 401 with an appropriate error message
 
 
 Example
@@ -30,6 +31,7 @@ var routes = [
       auth: true
     }
   }, {
+    //use the param _id to delete by
     method: "DELETE",
     path: "/something/{_id}",
     config: {
@@ -37,12 +39,14 @@ var routes = [
       auth: true
     }
   }, {
+    //use the param _id + queryString to find by
     method: "GET",
     path: "/something/{_id}",
     config: {
       handler: SomeHandler.findOne()
     }
   }, {
+    //uses the queryString querystring to search
     method: "GET",
     path: "/somethings/",
     config: {
@@ -52,9 +56,7 @@ var routes = [
 ];
 
 Hapi.routes(routes);
-
 ```
-
 
 Referance
 =========
@@ -71,8 +73,8 @@ The following options are valid.
   - `validate` - a function that is given the field value, `params` and  `request` and returns a string if invalid else return null
   - `transform` - a function that is given the field value, `params` and  `request` and returns the new value for the field
   - function - if only a function is given it is use a the `transform` option
-- `queries` - the same as fields except used to query mongo. Used by `update`, `delete`, `find` and `findOne`
-- `check` - a function that return a true/false before modifing the model, runs on update, delete, create  
+- `queries` - the same as fields except used to query mongo. Used by `update`, `delete`, `find` and `findOne`. The values come from the querystring.
+- `check` - a function that return a true/false before modifing the model, runs on `update`, `delete`, `create`  
 - `omit` - an array of fields to omit
 - `before` - a function that runs before anything else. It is given `fields` and the `request` object. You can return a modified `field`.
 - `after` - a function that runs after the model as been found or modified. It is given the results of the mongoose query and the `request` object. Whatever you turn will be the response. You can use this to wrap or modify the results from mongo. 
@@ -132,32 +134,29 @@ If you want to overload an individual handler.
 //3) we create a new generic handler with the prevous model
 var SomeHandler = new Handler();
 
-var routes = [
-  {
+If you want to overload an individual handler.
+
+```javascript
+//3) we create a new generic handler with the prevous model
+var SomeHandler = new Handler({
+  model: someModel
+});
+
+
+var routes = [{
     method: "POST",
     path: "/something",
     config: {
-      handler: SomeHandler.create(
-      {
-      model: SomeModel,
-      fields: {
-          //someFieldVal comes from request.params.someField
-          someField:{
-            transform: function(someFieldVal, params, request){
-            //return a new value for the field
-            return "Cadaverously Quaint";
-            },
-            //validation run after traform, so this will also return true
-            validate: function(someFieldVal, params, request){
-              //if false hapi will return a 401 error with a error message for someField
-              return someFieldVal == "Cadaverously Quaint";
-            }
-          }
-      }
-}    
-      
-      ),
-      auth: true
+      //create will now act on someThingElse instead of someModel 
+      handler: SomeHandler.create({
+        model: someThingElse,
+     })
     }
-  }];
+}];
+```
+More Examples
+=============
+[MetaGeo's event controller](https://github.com/craveprogramminginc/metageo-core/blob/master/controllers/eventController.coffee)
+
+
   
