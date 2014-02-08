@@ -1,7 +1,6 @@
 var Hapi = require('hapi'),
     Mongoose = require('mongoose'),
     Handler = require('../lib'),
-    Request = require('superagent'),
     Schema = Mongoose.Schema,
     Expect = require('chai').should(),
     server = null,
