@@ -1,8 +1,18 @@
 hapi-mongoose-handler
 =====================
+[![Build Status](https://travis-ci.org/craveprogramminginc/hapi-mongoose-handler.png?branch=master)](https://travis-ci.org/craveprogramminginc/hapi-mongoose-handler)
 - Easly turn you mongoose models into a RESTful API. 
 - Converts mongoose validation errors to 402's with an appropriate error message
 - Trys to follow hapi's configuration centric stlye
+
+Install
+=======
+`npm install hapi-mongoose-handler`
+Or
+`git clone https://github.com/craveprogramminginc/hapi-mongoose-handler && cd hapi-mongoose-handler`
+Then Build
+`npm prepublish`
+
 
 
 Example
@@ -155,6 +165,11 @@ More Examples
 - [MetaGeo's user controller](https://github.com/craveprogramminginc/metageo-core/blob/master/controllers/userController.coffee)
 - [MetaGeo's list controller](https://github.com/craveprogramminginc/metageo-core/blob/master/controllers/listController.coffee)
 
+
+Tests
+=====
+Tests are written in mocha
+To run tests `npm test`
 
 FAQs
 ====
