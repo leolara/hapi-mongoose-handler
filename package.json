@@ -5,9 +5,9 @@
     "mongoose",
     "mongo"
   ],
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./lib/index.js",
-  "description": "Generic handlers for quickly making RESTful APIss mongoose with hapi",
+  "description": "Generic handlers for quickly making RESTful APIs from mongoose schemas with hapi",
   "engines": {
     "node": ">=0.10.5"
   },
