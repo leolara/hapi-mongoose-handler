@@ -1,7 +1,7 @@
 hapi-mongoose-handler
 =====================
-- Easly turn you mongoose models into API endpoint. 
-- Converts mongoose validation errors to 401 with an appropriate error message
+- Easly turn you mongoose models into a RESTful API. 
+- Converts mongoose validation errors to 402's with an appropriate error message
 - Trys to follow hapi's configuration centric stlye
 
 
@@ -63,7 +63,7 @@ Referance
 =========
 ## new Handler([options])
 Create a new instance of hapi-mongoose-handler. 
-### options
+### Options
 The following options are valid.
 
 - `model` - the mongoose model we want to create an API for
@@ -73,14 +73,14 @@ The following options are valid.
 - `fields` - hash of fields that will be saved to the model. Used by `create` and `update` Each field can have the following option
   - `validate` - a function that is given the field value, `params` and  `request` and returns a string if invalid else return null
   - `transform` - a function that is given the field value, `params` and  `request` and returns the new value for the field
+  -  `rename` - a string that the field is renamed to before saving
   - function - if only a function is given it is use a the `transform` option
 - `queries` - the same as fields except used to query mongo. Used by `update`, `delete`, `find` and `findOne`. The values come from the querystring.
-- `check` - a function that return a true/false before modifing the model, runs on `update`, `delete`, `create`  
+- `check` - a function that is given the `model` and the `request`, return a true/false determining whether to modify the model, runs on `update`, `delete`  
 - `omit` - an array of fields to omit
-- `before` - a function that runs before anything else. It is given `fields` and the `request` object. You can return a modified `field`.
 - `after` - a function that runs after the model as been found or modified. It is given the results of the mongoose query and the `request` object. Whatever you turn will be the response. You can use this to wrap or modify the results from mongo. 
 
-### method
+### Methods
 theres are the method attached to handler instance. Each of the function take a options hash with the some option as the contructor. This enables you to overload the option for each individual handler
 - `create` create a document using the payload from the request
 - `find` find documents using the querystring to search by
@@ -131,11 +131,6 @@ var SomeHandler = new Handler({
 
 If you want to overload an individual handler.
 
-//3) we create a new generic handler with the prevous model
-var SomeHandler = new Handler();
-
-If you want to overload an individual handler.
-
 ```javascript
 //3) we create a new generic handler with the prevous model
 var SomeHandler = new Handler({
@@ -156,15 +151,21 @@ var routes = [{
 ```
 More Examples
 =============
-[MetaGeo's event controller](https://github.com/craveprogramminginc/metageo-core/blob/master/controllers/eventController.coffee)
+- [MetaGeo's event controller](https://github.com/craveprogramminginc/metageo-core/blob/master/controllers/eventController.coffee)
+- [MetaGeo's user controller](https://github.com/craveprogramminginc/metageo-core/blob/master/controllers/userController.coffee)
+- [MetaGeo's list controller](https://github.com/craveprogramminginc/metageo-core/blob/master/controllers/listController.coffee)
+
 
 FAQs
 ====
 ### So this shit is broken, now what?
 please open an [issue](https://github.com/craveprogramminginc/hapi-mongoose-handler/issues).
 
+### Can I have X ?
+please open an [issue](https://github.com/craveprogramminginc/hapi-mongoose-handler/issues).
+
 ### uhmm its written in coffeesccript and that not 'what the gods intended'
-Diversity is good, stop being a racist.  
+Diversity is good, stop being a racist and join the pagan dance circle 
 
 ### Why am I using mongoose in the first place?
 I don't know and thats beyond the scope of this project.
