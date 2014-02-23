@@ -201,7 +201,6 @@ describe('testing check function', function() {
         };
 
         server.inject({method: 'put', url: '/something2/'+ id, payload: payload}, function( res) {
-            console.log(res.statusCode);
             res.statusCode.should.equal(401);
             done();
         });
@@ -230,4 +229,49 @@ describe('testing check function', function() {
             done();
         });
     });
+});
+
+
+describe('testing events', function() {
+
+    it('create event', function(done) {
+
+        var payload = {
+            start: new Date(),
+            field1: "stuff",
+            field2: "fluff"
+        };
+
+        server.on('createTest', function(model){
+            id = model._id;
+            done();
+        });
+        server.inject({method: 'POST', url: '/something', payload: payload }, function(res) {
+        });
+    });
+
+    it('update event', function(done) {
+   
+        var payload = {
+            field1: "new stuff"
+        };
+
+        server.on('updateTest', function(model){
+            done();
+        });
+
+        server.inject({method: 'put', url: '/something/'+ id, payload: payload}, function( res) {
+        });
+    });
+
+    it('delete event', function(done) {
+
+        server.on('deleteTest', function(model){
+            done();
+        });
+
+        server.inject({method: 'delete', url: '/something/'+ id}, function( res) {
+        });
+    });
+
 });

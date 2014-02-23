@@ -26,6 +26,12 @@ module.exports = (options) ->
             if newReply
               model = newReply
 
+          eventName = Model.modelName[0].toUpperCase() + Model.modelName.slice 1
+          request.server.emit 'delete' + eventName, model
+
+          eventName = Model.collection.name[0].toUpperCase() + Model.collection.name.slice 1
+          request.server.emit 'delete' + eventName, model
+
           return reply model
       else
         return reply request.hapi.Error.unauthorized 'permission denied'

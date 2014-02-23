@@ -66,4 +66,10 @@ module.exports = (options) ->
           if newVals
             model = newVals
 
+        eventName = Model.modelName[0].toUpperCase() + Model.modelName.slice 1
+        request.server.emit 'create' + eventName, model
+
+        eventName = Model.collection.name[0].toUpperCase() + Model.collection.name.slice 1
+        request.server.emit 'create' + eventName, model
+
         return reply model
