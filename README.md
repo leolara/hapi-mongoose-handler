@@ -1,7 +1,7 @@
 hapi-mongoose-handler
 =====================
 [![Build Status](https://travis-ci.org/craveprogramminginc/hapi-mongoose-handler.png?branch=master)](https://travis-ci.org/craveprogramminginc/hapi-mongoose-handler)
-- Easly turn you mongoose models into a RESTful API. 
+- Easly turn your mongoose models into a RESTful API. 
 - Converts mongoose validation errors to 402's with an appropriate error message
 - Trys to follow hapi's configuration centric stlye
 
