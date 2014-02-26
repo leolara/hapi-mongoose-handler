@@ -1,18 +1,17 @@
-hapi-mongoose-handler
+hapi-mongoose-handler [![Build Status](https://travis-ci.org/craveprogramminginc/hapi-mongoose-handler.png?branch=master)](https://travis-ci.org/craveprogramminginc/hapi-mongoose-handler)
 =====================
-[![Build Status](https://travis-ci.org/craveprogramminginc/hapi-mongoose-handler.png?branch=master)](https://travis-ci.org/craveprogramminginc/hapi-mongoose-handler)
+
 - Easly turn your mongoose models into a RESTful API. 
 - Converts mongoose validation errors to 402's with an appropriate error message
 - Trys to follow hapi's configuration centric stlye
 
 Install
 =======
-`npm install hapi-mongoose-handler`
-Or
-`git clone https://github.com/craveprogramminginc/hapi-mongoose-handler && cd hapi-mongoose-handler`
-Then Build
-`npm prepublish`
-
+`npm install hapi-mongoose-handler`  
+Or  
+`git clone https://github.com/craveprogramminginc/hapi-mongoose-handler && cd hapi-mongoose-handler`  
+Then Build  
+`coffee -o lib/ -c src/`
 
 
 Example
@@ -97,6 +96,11 @@ theres are the method attached to handler instance. Each of the function take a 
 - `findOne` find one document using the querystring ORed with request.param as the condition parameter
 - `delete` delete one  document using the querystring ORed with request.param as the condition parameter
 
+### Events
+Adds the following events to hapi's [server](https://github.com/spumko/hapi/blob/master/docs/Reference.md#hapiserver) object
+- `create` - emits an event on creation of a model that is the concatenation of create and the model name with the first letter capitilized. For example if you had a model name `dog` when you created a new `dog` the event would be `createDog`
+- `update` - emits an event on the modification of a model that is the same format as create
+- `delete` - emits an event on the deletation of a model that is the same format as create
 
 Examples
 ========
@@ -159,6 +163,7 @@ var routes = [{
     }
 }];
 ```
+
 More Examples
 =============
 - [MetaGeo's event controller](https://github.com/craveprogramminginc/metageo-core/blob/master/controllers/eventController.coffee)
