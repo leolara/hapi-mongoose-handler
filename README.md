@@ -76,7 +76,7 @@ Create a new instance of hapi-mongoose-handler.
 The following options are valid.
 
 - `model` - the mongoose model we want to create an API for
-- `config` - a hash that set some configuation values for mongo
+- `config`  
   - `maxLimit` - the max number of results to return
   - `defaultOrder` the order of the results if no `order` is specified in the query
 - `fields` - hash of fields that will be saved to the model. Used by `create` and `update` Each field can have the following option
@@ -87,10 +87,10 @@ The following options are valid.
 - `queries` - the same as fields except used to query mongo. Used by `update`, `delete`, `find` and `findOne`. The values come from the querystring.
 - `check` - a function that is given the `model` and the `request`, return a true/false determining whether to modify the model, runs on `update`, `delete`  
 - `omit` - an array of fields to omit
-- `after` - a function that runs after the model as been found or modified. It is given the results of the mongoose query and the `request` object. Whatever you turn will be the response. You can use this to wrap or modify the results from mongo. 
+- `after` - a function that runs after the model as been found or modified. It is given the results of the mongoose query and the `request` object. Whatever you return will be the response. You can use this to wrap or modify the results from mongo. 
 
 ### Methods
-theres are the method attached to handler instance. Each of the function take a options hash with the some option as the contructor. This enables you to overload the option for each individual handler
+theses are the method attached to handler instance. Each of the function take a options hash with the same option as the contructor. This enables you to overload the option for each individual handler
 - `create` create a document using the payload from the request
 - `find` find documents using the querystring to search by
 - `findOne` find one document using the querystring ORed with request.param as the condition parameter
