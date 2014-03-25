@@ -5,7 +5,7 @@
     "mongoose",
     "mongo"
   ],
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "./lib/index.js",
   "description": "Generic handlers for quickly making RESTful APIs from mongoose schemas with hapi",
   "engines": {
@@ -19,7 +19,7 @@
     "lodash": "~2.4.1"
   },
   "peerDependencies": {
-    "hapi": "2.x.x"
+    "hapi": "3.x.x"
   },
   "scripts": {
     "prepublish": "./node_modules/coffee-script/bin/coffee  -o lib/ -c src/",
